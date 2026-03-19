@@ -1,7 +1,7 @@
 package com.characterman.server.service;
 
 import com.characterman.server.model.Character;
-import com.characterman.server.repository.CharRepository;
+import com.characterman.server.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class MongoCharService implements CharService {
 
-    private final CharRepository charRepository;
+    private final CharacterRepository charRepository;
 
     @Autowired
-    public MongoCharService(CharRepository charRepository) {
+    public MongoCharService(CharacterRepository charRepository) {
         this.charRepository = charRepository;
     }
 
