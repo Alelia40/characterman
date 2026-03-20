@@ -19,10 +19,11 @@ public class Character {
     private int intelligence;
     private int wisdom;
     private int charisma;
+    private String userId;
     private List<String> skills;
     private List<InventoryItem> inventory;
 
-    public Character(String id, String name, String classType, String race, int level, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, List<String> skills, List<InventoryItem> inventory) {
+    public Character(String id, String name, String classType, String race, int level, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, List<String> skills, List<InventoryItem> inventory, String userId) {
         this.id = id;
         this.name = name;
         this.classType = classType;
@@ -36,6 +37,15 @@ public class Character {
         this.charisma = charisma;
         this.skills = skills;
         this.inventory = inventory;
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getId() {

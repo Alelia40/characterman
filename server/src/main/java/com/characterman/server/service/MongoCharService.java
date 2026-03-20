@@ -19,8 +19,8 @@ public class MongoCharService implements CharService {
     }
 
     @Override
-    public List<Character> getAllCharacters() {
-        return charRepository.findAll();
+    public List<Character> getCharactersByUserId(String userId) {
+        return charRepository.findByUserId(userId);
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CharService {
-    List<Character> getAllCharacters();
+    List<Character> getCharactersByUserId(String userId);
     Optional<Character> getCharacterById(String id);
     Character createCharacter(Character character);
     void deleteCharacter(String id);
