@@ -5,32 +5,37 @@ import Home from './views/Home'
 import CharacterCreate from './views/CharacterCreate'
 import CharacterPlay from './views/CharacterPlay'
 import Characters from './views/Characters'
+import ProtectedRoute from './ProtectedRoute'
 
 const router = createBrowserRouter([
   {
-    path: '/',
     element: <App />,
     children: [
       {
         path: '/',
-        element: <Home />,
-      },
-      {
-        path: '/login',
         element: <Login />,
       },
       {
-        path: '/characters',
-        element: <Characters />,
-      },
-      {
-        path: '/characters/create',
-        element: <CharacterCreate />,
-      },
-      {
-        path: '/characters/:id/play',
-        element: <CharacterPlay />,
-      },
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: '/home',
+            element: <Home />,
+          },
+          {
+            path: '/characters',
+            element: <Characters />,
+          },
+          {
+            path: '/characters/create',
+            element: <CharacterCreate />,
+          },
+          {
+            path: '/characters/:id/play',
+            element: <CharacterPlay />,
+          },
+        ]
+      }
     ],
   },
 ])
