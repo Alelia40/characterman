@@ -11,6 +11,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
   login: (username: string, password: string) => Promise<void>;
+  signup: (username: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   loading: boolean;
 }
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const checkAuthStatus = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/user/profile'); // Endpoint to get current user
+      const response = await fetch('/api/users/profile'); // Endpoint to get current user
       if (response.ok) {
         const userData = await response.json();
         setUser(userData);
@@ -49,15 +50,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [checkAuthStatus]);
 
   const login = async (username, password) => {
-    const params = new URLSearchParams();
-    params.append('username', username);
-    params.append('password', password);
-
-    const response = await fetch('/login', {
+    const response = await fetch('/api/users/login', {
       method: 'POST',
-      body: params,
+      body: JSON.stringify({ username, password }),
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       }
     });
 
@@ -65,6 +62,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         await checkAuthStatus();
     } else {
         throw new Error('Login failed');
+    }
+  };
+
+  const signup = async (username, email, password) => {
+    const response = await fetch('/api/users/signup', {
+        method: 'POST',
+        body: JSON.stringify({ username, email, password }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error('Signup failed');
     }
   };
 
@@ -82,7 +93,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, loading }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, signup, logout, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );

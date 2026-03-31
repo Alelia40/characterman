@@ -6,6 +6,7 @@ import CharacterCreate from './views/CharacterCreate'
 import CharacterPlay from './views/CharacterPlay'
 import Characters from './views/Characters'
 import ProtectedRoute from './ProtectedRoute'
+import SignUp from './views/SignUp'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Login />,
+      },
+      {
+        path: '/signup',
+        element: <SignUp />,
       },
       {
         element: <ProtectedRoute />,
